@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv'); // setuping the configaration
 const morgan = require('morgan'); //get the log of url
-const bodyparser = require('body-parser');
 const path = require('path'); // geting the path
 
 // const connectDB = require('./cc/database/connection')
@@ -18,12 +17,12 @@ app.use(morgan('tiny'))
 // mongodb connection  
 // connectDB();
 
-// parse request to body-parser
-app.use(bodyparser.urlencoded({extended: true}))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true}))
 
 // set view engine
-app.set('view engine', 'ejs');
-// app.set('view',path.resolve(__dirname, 'view/ejs'))
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "view"));
 
 //load asset
 app.use('/css', express.static(path.resolve(__dirname, 'asset/css'))) //  we can use like this =  css/style.css
